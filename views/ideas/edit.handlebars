@@ -1,0 +1,31 @@
+<!-- passing errors to page -->
+<!-- looping through the errors -->
+{{#each errors}}
+    <!-- if error then put the text,  the text propty from error-->
+    <div class="alert alert-danger">{{text}}</div>
+{{else}}
+{{/each}}
+
+<!-- changing the _method with "PUT" -->
+<div class="card card-body">
+    <h3>Edit Notes</h3>
+    <form action="/ideas/edit/{{idea._id}}?_method=PUT" method="POST">
+
+        <!-- add the following <input type="hidden">, "_method" will be used in methodOverride -->
+        <!-- thus, app.put("xxx") can be handled -->
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" value="{{idea.title}}" />
+            <!-- value as part of the input attribute -->
+            <!-- empty input handled in 'ideasController.js', required attribute removed -->
+        </div>
+        <div class="form-group">
+            <label for="details">Details</label>
+            <textarea name="details" class="form-control" >{{idea.details}}</textarea>
+            <!-- variable as text content -->
+            <!-- empty input handled in 'ideasController.js', required attribute removed -->
+        </div>
+        <button type="submit" class="btn btn-primary">submit</button>
+    </form>
+</div>
